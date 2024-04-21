@@ -1,56 +1,71 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button } from 'react-native'; // Importa Button desde 'react-native'
 
-const LoginPage = () => {
- const [email, setEmail] = useState('');
- const [password, setPassword] = useState('');
+const LoginScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
- const handleLogin = () => {
-    // Aquí puedes llamar a tu controlador de autenticación
-    // Por ejemplo: authenticationController.login(email, password)
-    // Este es un ejemplo, asegúrate de implementar la lógica de autenticación adecuada
-    console.log('Iniciando sesión con:', email, password);
- };
+  const handleLogin = () => {
+    // Aquí puedes agregar la lógica para autenticar al usuario
+    if (email === 'usuario@example.com' && password === '123456') {
+      // Si las credenciales son correctas, puedes navegar a otra pantalla o realizar otra acción
+      console.log('Inicio de sesión exitoso');
+    } else {
+      // Si las credenciales son incorrectas, muestra un mensaje de error
+      setErrorMessage('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+    }
+  };
 
- return (
+  return (
     <View style={styles.container}>
       <Text style={styles.title}>Iniciar Sesión</Text>
+      {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
       <TextInput
         style={styles.input}
         placeholder="Correo electrónico"
-        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
         value={email}
+        onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
-        onChangeText={setPassword}
-        value={password}
         secureTextEntry
+        value={password}
+        onChangeText={setPassword}
       />
       <Button title="Iniciar Sesión" onPress={handleLogin} />
     </View>
- );
+  );
 };
 
 const styles = StyleSheet.create({
- container: {
+  container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: 20,
- },
- title: {
+  },
+  title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
- },
- input: {
+  },
+  input: {
+    width: '40%',
     height: 40,
-    borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: 10,
+    borderColor: '#ccc',
+    borderRadius: 5,
     paddingHorizontal: 10,
- },
+    marginBottom: 10,
+  },
+  error: {
+    color: 'red',
+    marginBottom: 10,
+  },
 });
 
-export default LoginPage;
+export default LoginScreen;
