@@ -1,71 +1,64 @@
+// pages/login.js
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native'; // Importa Button desde 'react-native'
+import { Text, View, TextInput, TouchableOpacity, Animated } from 'react-native';
+import { loginUser } from '../controllers/authenticationController';
+import styles from '../public/style';
+import IndexPage from './index';
+
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [authenticated, setAuthenticated] = useState(false); // Estado para controlar la autenticación
 
-  const handleLogin = () => {
-    // Aquí puedes agregar la lógica para autenticar al usuario
-    if (email === 'usuario@example.com' && password === '123456') {
-      // Si las credenciales son correctas, puedes navegar a otra pantalla o realizar otra acción
-      console.log('Inicio de sesión exitoso');
+  const opacity = new Animated.Value(1);
+
+  const handleSubmit = () => {
+    const success = loginUser(email, password);
+    if (success) {
+      // Handle successful authentication
+      console.log('Authenticated successfully');
+      setAuthenticated(true); // Establece el estado de autenticación como verdadero
+
+      // Navigate to IndexPage
+      // Esto depende de cómo estés manejando la navegación. Si estás utilizando React Navigation, puedes usar props.navigation.navigate('IndexPage') aquí.
     } else {
-      // Si las credenciales son incorrectas, muestra un mensaje de error
-      setErrorMessage('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+      // Handle authentication failure
+      setErrorMessage('Invalid email or password');
     }
   };
 
+  if (authenticated) {
+    return <IndexPage />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Iniciar Sesión</Text>
-      {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
-      <TextInput
-        style={styles.input}
-        placeholder="Correo electrónico"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Contraseña"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <Button title="Iniciar Sesión" onPress={handleLogin} />
-    </View>
+    <Animated.View style={{ opacity }}>
+      <View style={styles.container}>
+        <Text style={styles.title}>AppTec</Text>
+        {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+        <TextInput
+          style={styles.input}
+          placeholder="Correo electrónico"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Contraseña"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Iniciar Sesión</Text>
+        </TouchableOpacity>
+      </View>
+    </Animated.View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  input: {
-    width: '40%',
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  error: {
-    color: 'red',
-    marginBottom: 10,
-  },
-});
 
 export default LoginScreen;
