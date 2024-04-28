@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Importa useNavigation desde React Navigation
 
 const AppLogin = () => {
   const [controlNumber, setControlNumber] = useState('');
   const [nip, setNip] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigation = useNavigation(); // Obtiene el objeto de navegación
 
   const handleLogin = () => {
-    // Realizar la validación aquí
+    // Realiza la validación aquí
     if (controlNumber === '19141139' && nip === '123') {
-      // Si los datos son correctos, navegar a otra interfaz
-      // Aquí puedes usar alguna navegación de React Navigation o cualquier otra librería de navegación
-      console.log('Login exitoso');
+      // Si los datos son correctos, navega a otra interfaz
+      navigation.navigate('AppID'); // Cambia 'OtraInterfaz' por el nombre de tu otra interfaz en las rutas de navegación
     } else {
-      // Si los datos son incorrectos, mostrar un mensaje de error
+      // Si los datos son incorrectos, muestra un mensaje de error
       setErrorMessage('Verifica tus credenciales');
     }
   };
@@ -90,4 +91,3 @@ const styles = StyleSheet.create({
 });
 
 export default AppLogin;
-

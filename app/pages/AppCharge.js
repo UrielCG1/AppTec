@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Image, Text, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './AppLogin';
+import AppLogin from './AppLogin';
 
 const Stack = createStackNavigator();
 
@@ -26,7 +26,7 @@ const AppCharge = () => {
       </View>
     );
   } else {
-    return <LoginScreen />; // Return IndexPage after 2 seconds
+    return <AppLogin />; // Return IndexPage after 2 seconds
   }
 };
 
