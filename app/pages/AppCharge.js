@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Image, Text, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './login';
+import LoginScreen from './AppLogin';
 
 const Stack = createStackNavigator();
 
-const InicioScreen = () => {
+const AppCharge = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,4 +30,4 @@ const InicioScreen = () => {
   }
 };
 
-export default InicioScreen;
+export default AppCharge;

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import InicioScreen from './pages/inicio';
-import LoginScreen from './pages/login';
+import InicioScreen from './pages/AppCharge';
+import LoginScreen from './pages/AppLogin';
 import IndexPage from './pages/index';
 
 const Stack = createStackNavigator();
