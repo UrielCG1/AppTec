@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Importa useNavigation desde React Navigation
+import { loginUser } from '../controllers/authenticationController';
 
 const AppLogin = () => {
-  const [controlNumber, setControlNumber] = useState('');
+  const [numDeControl, setControlNumber] = useState('');
   const [nip, setNip] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigation = useNavigation(); // Obtiene el objeto de navegación
 
   const handleLogin = () => {
-    // Realiza la validación aquí
-    if (controlNumber === '19141139' && nip === '123') {
-      // Si los datos son correctos, navega a otra interfaz
-      navigation.navigate('AppID'); // Cambia 'OtraInterfaz' por el nombre de tu otra interfaz en las rutas de navegación
+    const { success, user, message } = loginUser(numDeControl, nip);
+    if (success) {
+      const { nombreUsuario } = user;
+      navigation.navigate('IndexPage', { nombreUsuario });
     } else {
-      // Si los datos son incorrectos, muestra un mensaje de error
-      setErrorMessage('Verifica tus credenciales');
+      setErrorMessage(message);
     }
   };
 
@@ -32,7 +32,7 @@ const AppLogin = () => {
         <TextInput
           style={[styles.input, { color: 'gray' }, { textAlign: 'center' }]}
           placeholder="No. Control"
-          value={controlNumber}
+          value={numDeControl}
           onChangeText={text => setControlNumber(text)}
         />
         <TextInput

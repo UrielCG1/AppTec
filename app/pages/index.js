@@ -1,31 +1,43 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View, Button, SafeAreaView, Image, Dimensions } from 'react-native';
+import { users } from '../controllers/authenticationController'; // Importa el controlador de autenticación
 
-const IndexPage = () => {
-  const navigation = useNavigation(); // Obtener el objeto de navegación
+
+const { width, height } = Dimensions.get('window');
+const IndexPage = ({ navigation, route }) => {
+  const { nombreUsuario } = route.params;
+
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.navbar}>
-        <Button title="Back" onPress={() => navigation.goBack()} /> {/* Botón de retroceso */}
-        <Text style={styles.title}>AppTec</Text>
+      <View style={styles.header}>
+        <Image
+          source={require('./logo.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <Text style={styles.title}>Bienvenido {nombreUsuario}</Text>
       </View>
       <View style={styles.content}>
-        <Text style={styles.welcome}>Welcome to AppTec!</Text>
-
-        {/* Agregar el apartado de fechas y texto */}
         <View style={styles.dateContainer}>
           <Text style={styles.date}>Fecha de inicio: 01/04/2024</Text>
           <Text style={styles.date}>Fecha de fin: 30/04/2024</Text>
           <Text style={styles.evaluacionText}>Evaluación Docente</Text>
         </View>
-
-        <View style={styles.buttonContainer}>
-          <Button title="Credencial Digital" onPress={() => navigation.navigate('Credential')} />
-          <Button title="Horario" onPress={() => navigation.navigate('Schedule')} />
-        </View>
       </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Credencial Digital"
+            onPress={() => navigation.navigate('AppID')}
+            color="#007AFF"
+          />
+          <View style={styles.buttonSeparator} />
+          <Button
+            title="Horario"
+            onPress={() => navigation.navigate('Schedule')}
+            color="#FE9040"
+          />
+        </View>
     </SafeAreaView>
   );
 };
@@ -33,48 +45,51 @@ const IndexPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#000D32',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  navbar: {
-    backgroundColor: '#007AFF',
-    flexDirection: 'row', // Alineación de elementos en fila
-    alignItems: 'center', // Alinear elementos verticalmente al centro
-    padding: 10,
+  header: {
+    alignItems: 'center',
+    marginBottom: height * 0.05,
+  },
+  logo: {
+    width: width * 0.5,
+    height: width * 0.5,
   },
   title: {
-    color: '#fff',
-    fontSize: 24,
+    fontSize: width * 0.07,
     fontWeight: 'bold',
-    marginLeft: 10, // Margen izquierdo para separar el título del botón de retroceso
+    color: '#FFF',
+    marginTop: height * 0.02,
   },
   content: {
-    flex: 1,
-    padding: 20,
-  },
-  welcome: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    padding: width * 0.04,
+    borderRadius: width * 0.04,
+    width: width * 0.9,
   },
   dateContainer: {
-    marginBottom: 20,
-    backgroundColor: '#F2F2F2',
-    padding: 10,
-    borderRadius: 10,
+    marginBottom: height * 0.02,
   },
   date: {
-    fontSize: 18,
-    marginBottom: 10,
+    fontSize: width * 0.05,
+    marginBottom: height * 0.01,
     color: '#333',
   },
   evaluacionText: {
-    fontSize: 20,
+    fontSize: width * 0.06,
     fontWeight: 'bold',
-    color: '#FF5733',
+    color: '#FE9040',
   },
   buttonContainer: {
+    marginTop: height * 0.07,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 'auto',
+  },
+  buttonSeparator: {
+    width: width * 0.09,
   },
 });
 
