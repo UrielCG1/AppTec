@@ -13,11 +13,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" />
-      <Stack.Navigator initialRouteName="AppID">
+      <Stack.Navigator initialRouteName="AppCharge">
         <Stack.Screen name="AppCharge" component={AppCharge} options={{ headerShown: false }} />
-        <Stack.Screen name="AppLogin" component={AppLogin} />
-        <Stack.Screen name="IndexPage" component={IndexPage} options={{ title: 'Index Page' }} />
-        <Stack.Screen name="AppID" component={AppID} />
+        <Stack.Screen name="AppLogin" component={AppLogin} options={{ headerShown: false }} />
+        <Stack.Screen name="IndexPage" component={IndexPage} options={{ headerShown: false }}  />
+        <Stack.Screen name="AppID" component={AppID} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

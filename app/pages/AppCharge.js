@@ -22,7 +22,7 @@ const AppCharge = () => {
           source={require('./logo.png')} // Ajusta la ruta según la ubicación del archivo de imagen en tu proyecto
           style={{ width: 300, height: 300 }} // Ajusta el estilo según sea necesario
         />
-        <ActivityIndicator size="large" color="#ffffff" style={{ position: 'absolute', top: '70%' }} />
+        <ActivityIndicator size="large" color="#ffffff" style={{ position: 'absolute', top: '80%' }} />
       </View>
     );
   } else {
