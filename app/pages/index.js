@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView, Image, Dimensions } from 'react-native';
-import { users } from '../controllers/authenticationController'; // Importa el controlador de autenticación
 
 const { width, height } = Dimensions.get('window');
 
-const IndexPage = ({ navigation, route }) => {
+const index = ({ navigation, route }) => {
   const { nombreUsuario } = route.params;
 
   return (
@@ -15,29 +14,31 @@ const IndexPage = ({ navigation, route }) => {
           style={styles.logo}
           resizeMode="contain"
         />
-        <Text style={styles.title}>Bienvenido {nombreUsuario}</Text>
+        <Text style={styles.title}>¡Bienvenido, {nombreUsuario}!</Text>
       </View>
       <View style={styles.content}>
+        <Text style={styles.evaluationText}>Evaluación Docente</Text>
+        <Text style={styles.hr}>------------------------------------</Text>
         <View style={styles.dateContainer}>
-          <Text style={styles.evaluacionText}>Evaluación Docente</Text>
           <Text style={styles.date}>Fecha de inicio: 01/04/2024</Text>
           <Text style={styles.date}>Fecha de fin: 30/04/2024</Text>
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <Button
-          title="Credencial Digital"
-          onPress={() => navigation.navigate('AppID')}
-          color="#007AFF"
-          style={styles.button}
-        />
-        <View style={styles.buttonSeparator} />
-        <Button
-          title="Horario"
-          onPress={() => navigation.navigate('Schedule')}
-          color="#FE9040"
-          style={styles.button}
-        />
+        <View style={styles.button}>
+          <Button
+            title="Ver Credencial Digital"
+            onPress={() => navigation.navigate('AppID')}
+            color="#007AFF"
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            title="Ver Horario"
+            onPress={() => navigation.navigate('Schedule')}
+            color="#FE9040"
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -46,7 +47,7 @@ const IndexPage = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000D32',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -59,47 +60,49 @@ const styles = StyleSheet.create({
     height: width * 0.5,
   },
   title: {
-    fontSize: width * 0.07,
+    fontSize: width * 0.06,
     fontWeight: 'bold',
-    color: '#FFF',
+    color: '#333',
     marginTop: height * 0.02,
   },
   content: {
     alignItems: 'center',
-    backgroundColor: '#FFF',
+    backgroundColor: '#F0F0F0',
     padding: width * 0.04,
     borderRadius: width * 0.04,
     width: width * 0.9,
+    marginBottom: height * 0.05,
   },
-  dateContainer: {
+  hr: {
+    fontSize: width * 0.05,
+    color: '#333',
     marginBottom: height * 0.02,
   },
-  date: {
-    fontSize: width * 0.05,
-    marginBottom: height * 0.01,
-    color: '#333',
+  dateContainer: {
+    marginTop: height * 0.02,
   },
-  evaluacionText: {
+  date: {
+    fontSize: width * 0.04,
+    marginBottom: height * 0.01,
+    color: '#666',
+  },
+  evaluationText: {
     fontSize: width * 0.06,
     fontWeight: 'bold',
     color: '#FE9040',
+    marginBottom: height * 0.02,
   },
   buttonContainer: {
-    marginTop: height * 0.07,
     flexDirection: 'row',
-    justifyContent: 'between',
-    height: height * 0.06,
-    borderRadius: width * 0.03, // Hacer los botones más redondeados
-    overflow: 'hidden', // Para que los bordes redondeados se vean correctamente
-  },
-  buttonSeparator: {
-    width: width * 0.05,
+    justifyContent: 'space-between',
+    width: width * 0.9,
   },
   button: {
-    borderRadius: width * 0.03, // Redondear los bordes de los botones
-    height: height * 0.3, // Aumentar la altura de los botones
-    elevation: 8, // Agregar sombra para efecto 3D en Android
+    width: '45%',
+    borderRadius: width * 0.03,
+    height: height * 0.06,
+    elevation: 8,
   },
 });
 
-export default IndexPage;
+export default index;

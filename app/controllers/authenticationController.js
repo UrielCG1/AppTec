@@ -5,7 +5,7 @@ import IndexPage from '../pages/index'; // Importa IndexPage desde '../pages/ind
 const users = [
   { id: 1, numDeControl: '20140185', nip: '1421', nombreUsuario: 'Uriel Carbajal' },
   { id: 2, numDeControl: '20140189', nip: '1234', nombreUsuario: 'Miguel Ángel Ibarra' },
-  { id: 3, numDeControl: '19141139', password: '123', nombreUsuario: 'Oscar Escamilla' },
+  { id: 3, numDeControl: '19141139', nip: '1234', nombreUsuario: 'Oscar Escamilla' }
 ];
 
 // Function to authenticate user
